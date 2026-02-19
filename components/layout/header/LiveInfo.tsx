@@ -1,19 +1,18 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Calendar, Clock, Sunrise, Sun, Coffee, Moon } from 'lucide-react';
+import { Calendar, Clock, Sunrise, Sun, Coffee, Moon, LucideIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-export default function LiveInfo() {
-    const [time, setTime] = useState(new Date());
-    const greeting =
-        time.getHours() < 6
-            ? '부지런하시네요!'
-            : time.getHours() < 12
-              ? '좋은 아침이에요!'
-              : time.getHours() < 18
-                ? '오후도 화이팅!'
-                : '편안함 밤 되세요.';
 
+const getGreetingConfig = (hour: number): { text: string; Icon: LucideIcon; color: string } => {
+    if (hour < 6) return { text: '부지런하시네요!', Icon: Sunrise, color: 'text-amber-500' };
+    if (hour < 12) return { text: '좋은 아침이에요!', Icon: Sun, color: 'text-yellow-500' };
+    if (hour < 18) return { text: '오후도 화이팅!', Icon: Coffee, color: 'text-orange-500' };
+    return { text: '편안한 밤 되세요.', Icon: Moon, color: 'text-indigo-400' };
+};
+export default function LiveInfo() {
+    const [time, setTime] = useState<Date>(new Date());
+    const { text, Icon, color } = getGreetingConfig(time.getHours());
     useEffect(() => {
         // 1초 간격으로 시간 갱신
         const timer = setInterval(() => setTime(new Date()), 1000);
@@ -34,16 +33,8 @@ export default function LiveInfo() {
                 </div>
                 <div className="h-8 w-[1px] bg-slate-300" />
                 <div className="flex items-center gap-2 text-slate-600">
-                    {time.getHours() < 6 ? (
-                        <Sunrise size={20} className="text-amber-500" />
-                    ) : time.getHours() < 12 ? (
-                        <Sun size={20} className="text-yellow-500" />
-                    ) : time.getHours() < 18 ? (
-                        <Coffee size={20} className="text-orange-500" />
-                    ) : (
-                        <Moon size={20} className="text-indigo-400" />
-                    )}
-                    <span className="font-bold">{greeting}</span>
+                    <Icon size={20} className={color} />
+                    <span className="font-bold">{text}</span>
                 </div>
             </div>
         </div>
