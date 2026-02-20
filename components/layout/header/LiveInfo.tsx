@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, Clock, Sunrise, Sun, Coffee, Moon, LucideIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import LiveInfo_skeleton from './LiveInfo_skeleton';
 
 const getGreetingConfig = (hour: number): { text: string; Icon: LucideIcon; color: string } => {
     if (hour < 6) return { text: '부지런하시네요!', Icon: Sunrise, color: 'text-amber-500' };
@@ -11,14 +12,21 @@ const getGreetingConfig = (hour: number): { text: string; Icon: LucideIcon; colo
     return { text: '편안한 밤 되세요.', Icon: Moon, color: 'text-indigo-400' };
 };
 export default function LiveInfo() {
-    const [time, setTime] = useState<Date>(new Date());
-    const { text, Icon, color } = getGreetingConfig(time.getHours());
+    const [time, setTime] = useState<Date | null>(null);
+
     useEffect(() => {
         // 1초 간격으로 시간 갱신
         const timer = setInterval(() => setTime(new Date()), 1000);
 
         return () => clearInterval(timer);
     }, []);
+
+    // 브라우저에서 렌더링 시, 로딩 상태.
+    if (!time) {
+        return <LiveInfo_skeleton />;
+    }
+
+    const { text, Icon, color } = getGreetingConfig(time.getHours());
 
     return (
         <div className="flex flex-col items-start md:items-end gap-2 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-white/60 shadow-sm">
