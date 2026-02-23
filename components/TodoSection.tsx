@@ -1,33 +1,12 @@
 'use client';
 import TitleLine from './todo/TitleLine';
 import { Plus } from 'lucide-react';
-import { useState } from 'react';
-import { todoType } from '@/types/todoType';
 import TodoList from './todo/TodoList';
+import useTodo from '@/hooks/useTodo';
 
 export default function TodoSection() {
-    const [todoList, setTodoList] = useState<Array<todoType>>([]);
-    const [inputValue, setInputValue] = useState<string>('');
+    const { todoList, inputValue, setInputValue, addTodo, toggleTodo, deleteTodo, progress } = useTodo();
 
-    const progress: number =
-        todoList.length !== 0 ? Math.floor((todoList.filter(x => x.completed).length / todoList.length) * 100) : 0;
-
-    const addTodo = (e: React.FormEvent): void => {
-        e.preventDefault();
-
-        if (!inputValue.trim()) return;
-        const todo = { text: inputValue, completed: false };
-        setTodoList([...todoList, todo]);
-        setInputValue('');
-    };
-
-    const toggleTodo = (idx: number): void => {
-        setTodoList(todoList.map((x, index) => (idx === index ? { ...x, completed: !x.completed } : x)));
-    };
-
-    const deleteTodo = (idx: number): void => {
-        setTodoList(todoList.filter((x, index) => idx !== index));
-    };
     return (
         <div className="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-sm border border-slate-200 h-full flex flex-col">
             <TitleLine progress={progress} />
