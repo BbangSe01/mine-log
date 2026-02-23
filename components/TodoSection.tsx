@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react';
 import useTodo from '@/hooks/useTodo';
 import dynamic from 'next/dynamic';
 import TodoListSkeleton from './skeletons/TodoListSkeleton';
+import CompletionMessage from './todo/CompletionMessage';
 
 const DynamicTodoList = dynamic(() => import('./todo/TodoList'), {
     ssr: false,
@@ -11,11 +12,12 @@ const DynamicTodoList = dynamic(() => import('./todo/TodoList'), {
 });
 
 export default function TodoSection() {
-    const { todoList, inputValue, setInputValue, addTodo, toggleTodo, deleteTodo, progress } = useTodo();
+    const { todoList, inputValue, setInputValue, addTodo, toggleTodo, deleteTodo, resetTodo, progress } = useTodo();
 
     return (
         <div className="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-sm border border-slate-200 h-full flex flex-col">
             <TitleLine progress={progress} />
+            <CompletionMessage progress={progress} todoList={todoList} resetTodo={resetTodo} />
             <form onSubmit={addTodo} className="flex gap-2 mb-4">
                 <input
                     type="text"
