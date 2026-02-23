@@ -47,5 +47,9 @@ export default function useTodo() {
         setTodoList(todoList.filter((x, index) => idx !== index));
     };
 
-    return { todoList, inputValue, setInputValue, addTodo, toggleTodo, deleteTodo, progress, getFromLS };
+    const resetTodo = (): void => {
+        setTodoList([]);
+    };
+
+    return { todoList, inputValue, setInputValue, addTodo, toggleTodo, deleteTodo, resetTodo, progress, getFromLS };
 }
