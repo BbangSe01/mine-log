@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, Clock, Sunrise, Sun, Coffee, Moon, LucideIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import LiveInfo_skeleton from './LiveInfo_skeleton';
+import LiveInfo_skeleton from '../skeletons/LiveInfo_skeleton';
 
 const getGreetingConfig = (hour: number): { text: string; Icon: LucideIcon; color: string } => {
     if (hour < 6) return { text: '부지런하시네요!', Icon: Sunrise, color: 'text-amber-500' };

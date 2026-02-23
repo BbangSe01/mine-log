@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { StickyNote } from 'lucide-react';
 
 export default function MemoSection() {
-    const [memo, setMemo] = useState('');
+    const [memo, setMemo] = useState<string>('');
 
     return (
         <div className="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-sm border border-slate-200 h-full flex flex-col">
