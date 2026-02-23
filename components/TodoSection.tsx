@@ -1,8 +1,14 @@
 'use client';
 import TitleLine from './todo/TitleLine';
 import { Plus } from 'lucide-react';
-import TodoList from './todo/TodoList';
 import useTodo from '@/hooks/useTodo';
+import dynamic from 'next/dynamic';
+import TodoListSkeleton from './skeletons/TodoListSkeleton';
+
+const DynamicTodoList = dynamic(() => import('./todo/TodoList'), {
+    ssr: false,
+    loading: () => <TodoListSkeleton />,
+});
 
 export default function TodoSection() {
     const { todoList, inputValue, setInputValue, addTodo, toggleTodo, deleteTodo, progress } = useTodo();
@@ -25,11 +31,7 @@ export default function TodoSection() {
                     <Plus size={20} />
                 </button>
             </form>
-            {todoList.length !== 0 ? (
-                <TodoList todoList={todoList} deleteTodo={deleteTodo} toggleTodo={toggleTodo} />
-            ) : (
-                <div className="text-center py-8 text-slate-400 text-sm italic">할 일을 모두 마쳤거나 없습니다.</div>
-            )}
+            <DynamicTodoList todoList={todoList} deleteTodo={deleteTodo} toggleTodo={toggleTodo} />
         </div>
     );
 }
