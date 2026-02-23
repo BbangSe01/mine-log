@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
 import { StickyNote } from 'lucide-react';
+import useUserMemo from '@/hooks/useUserMemo';
 
 export default function MemoSection() {
-    const [memo, setMemo] = useState<string>('');
+    const { memo, setMemo } = useUserMemo();
 
     return (
         <div className="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-sm border border-slate-200 h-full flex flex-col">
