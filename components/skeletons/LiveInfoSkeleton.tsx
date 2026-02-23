@@ -1,4 +1,4 @@
-export default function LiveInfo_skeleton() {
+export default function LiveInfoSkeleton() {
     return (
         <div className="flex flex-col items-start md:items-end gap-2 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-white/60 shadow-sm animate-pulse">
             {/* 상단 날짜 영역 스켈레톤 */}
