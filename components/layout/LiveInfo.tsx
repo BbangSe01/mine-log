@@ -29,7 +29,7 @@ export default function LiveInfo() {
     const { text, Icon, color } = getGreetingConfig(time.getHours());
 
     return (
-        <div className="flex flex-col items-start md:items-end gap-2 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-white/60 shadow-sm">
+        <div className="flex flex-col items-start md:items-end gap-2 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-white/60 shadow-sm m-0 md:mr-6">
             <div className="flex items-center gap-2 text-slate-600 font-bold">
                 <Calendar size={18} />
                 <span>{format(time, 'yyyy년 MM월 dd일 (eeee)', { locale: ko })}</span>
