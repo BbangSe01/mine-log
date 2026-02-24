@@ -1,1 +1,6 @@
+/* globals.css */
 @import 'tailwindcss';
+
+/* 만약 특정 경로를 강제로 스캔해야 한다면 (v4 기준) */
+@source "../app/**/*.{js,ts,jsx,tsx}";
+@source "../components/**/*.{js,ts,jsx,tsx}";
