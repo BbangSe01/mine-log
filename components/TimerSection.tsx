@@ -5,6 +5,7 @@ import { Timer as TimerIcon, Play, Pause, RotateCcw, Coffee } from 'lucide-react
 export default function TimerSection() {
     const [totalSet, setTotalSet] = useState(25 * 60); // seconds
     const [timeLeft, setTimeLeft] = useState(25 * 60);
+    const isComplete = timeLeft === 0;
     const [isActive, setIsActive] = useState(false);
     const [mode, setMode] = useState<'work' | 'break'>('work');
 
@@ -36,6 +37,18 @@ export default function TimerSection() {
 
         return () => clearInterval(interval);
     }, [isActive]);
+
+    useEffect(() => {
+        if (!isComplete) return; // mode 바뀔 때는 여기서 바로 종료
+
+        if (Notification.permission === 'granted') {
+            const body =
+                mode === 'work'
+                    ? '집중 시간이 끝났어요. 잠깐 쉬어가세요!'
+                    : '재충전 완료! 이제 다시 시작할 시간이에요.';
+            new Notification('⏰ 타이머 종료', { body });
+        }
+    }, [isComplete, mode]);
 
     const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
@@ -223,7 +236,7 @@ export default function TimerSection() {
                             >
                                 {formatTime(timeLeft)}
                             </span>
-                            {timeLeft === 0 ? (
+                            {isComplete ? (
                                 <span className={`text-xs font-bold mt-1 animate-pulse ${accent}`}>완료!</span>
                             ) : !isActive ? (
                                 <span className="text-xs text-slate-300 mt-1 group-hover:text-slate-400 transition-colors">
@@ -239,7 +252,7 @@ export default function TimerSection() {
             <div className="flex gap-4 mb-3">
                 <button
                     onClick={() => setIsActive(!isActive)}
-                    disabled={timeLeft === 0 || editing}
+                    disabled={isComplete || editing}
                     className={`w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-md disabled:opacity-40 ${
                         isActive ? 'bg-slate-800 text-white' : `${accentBg} text-white`
                     }`}
