@@ -7,7 +7,7 @@ export default function Header() {
             <div className="space-y-2 z-10 pl-8">
                 <div className="flex items-center gap-3 text-slate-500 mb-1">
                     <LayoutDashboard size={20} className="text-blue-500" />
-                    <span className="font-bold tracking-widest text-sm uppercase">Personal Workspace</span>
+                    <span className="font-bold tracking-widest text-sm uppercase">Mine-Log : Personal Workspace</span>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
                     오늘도 기분 좋은 <br />

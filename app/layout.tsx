@@ -1,21 +1,26 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import { ImageWithFallback } from '@/public/figma/ImageWithFallback';
-const geistSans = Geist({
-    variable: '--font-geist-sans',
-    subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
-    title: 'Mine-Log',
-    description: '하루 일과를 관리해주는 간편 대시보드',
+    title: {
+        default: 'Mine-Log',
+        template: '%s | mine-log', // 다른 페이지에서 제목을 설정할 때 뒤에 붙는 이름
+    },
+    description: '로그인 없이 브라우저에서 바로 시작하는 나만의 기록장.',
+    keywords: ['데일리 대시보드', '투두리스트', '온라인 메모장'],
+    openGraph: {
+        title: 'mine-log | 나를 위한 데일리 대시보드',
+        description: '가입 없이 바로 사용하는 데일리 대시보드',
+        // url: 'https://domain.com', // 추후 배포될 실제 도메인
+        siteName: 'Mine-Log',
+        locale: 'ko_KR',
+        type: 'website',
+    },
+    icons: {
+        icon: '/layoutDashboard.svg', //설정한 아이콘 경로
+    },
 };
 
 export default function RootLayout({
