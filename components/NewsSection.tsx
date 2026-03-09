@@ -52,11 +52,17 @@ export default async function NewsSection() {
                                 {idx + 1}
                             </span>
                             <div className="flex-shrink-0">
-                                <ImageWithFallback
-                                    src={item.image_url || undefined}
-                                    alt={item.title}
-                                    className="w-16 h-16 object-cover rounded-lg"
-                                />
+                                {item.image_url ? (
+                                    <ImageWithFallback
+                                        src={item.image_url || undefined}
+                                        alt={item.title}
+                                        className="w-16 h-16 object-cover rounded-lg"
+                                    />
+                                ) : (
+                                    <div className="w-16 h-16 rounded-lg bg-slate-100 flex items-center justify-center">
+                                        <Newspaper className="text-slate-400" size={24} />
+                                    </div>
+                                )}
                             </div>
                             {/* 내용 */}
                             <div className="flex-1 min-w-0">
