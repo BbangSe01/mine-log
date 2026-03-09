@@ -4,6 +4,8 @@ import PlaylistSection from '@/components/PlaylistSection';
 import TimerSection from '@/components/TimerSection';
 import NewsSection from '@/components/NewsSection';
 import NotificationInit from '@/components/NotificationInit';
+import { Suspense } from 'react';
+import NewsSkeleton from '@/components/skeletons/NewsSkeleton';
 export default function Home() {
     return (
         <>
@@ -19,10 +21,12 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* Row 2: News, Timer, Horoscope */}
+                {/* Row 2: News, Timer, Playlist */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <div className="h-[400px]">
-                        <NewsSection />
+                        <Suspense fallback={<NewsSkeleton />}>
+                            <NewsSection />
+                        </Suspense>
                     </div>
                     <div className="h-[400px]">
                         <TimerSection />
