@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'mine-log | 나를 위한 데일리 대시보드',
         description: '가입 없이 바로 사용하는 데일리 대시보드',
-        // url: 'https://domain.com', // 추후 배포될 실제 도메인
+        url: 'https://mine-log.vercel.app/',
         siteName: 'Mine-Log',
         locale: 'ko_KR',
         type: 'website',
