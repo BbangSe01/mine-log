@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import { ImageWithFallback } from '@/public/figma/ImageWithFallback';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
     title: {
@@ -43,6 +44,7 @@ export default function RootLayout({
                     <Header />
                     {children}
                 </div>
+                <Analytics />
             </body>
         </html>
     );
