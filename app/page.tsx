@@ -2,7 +2,7 @@ import MemoSection from '@/components/MemoSection';
 import TodoSection from '@/components/TodoSection';
 import PlaylistSection from '@/components/PlaylistSection';
 import TimerSection from '@/components/TimerSection';
-import FortuneSection from '@/components/FortuneSection';
+import NewsSection from '@/components/NewsSection';
 import NotificationInit from '@/components/NotificationInit';
 export default function Home() {
     return (
@@ -22,13 +22,13 @@ export default function Home() {
                 {/* Row 2: News, Timer, Horoscope */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <div className="h-[400px]">
-                        <PlaylistSection />
+                        <NewsSection />
                     </div>
                     <div className="h-[400px]">
                         <TimerSection />
                     </div>
                     <div className="h-[400px]">
-                        <FortuneSection />
+                        <PlaylistSection />
                     </div>
                 </div>
             </div>
