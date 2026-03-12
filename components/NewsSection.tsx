@@ -14,7 +14,9 @@ export default async function NewsSection() {
     const getNews = async () => {
         const apiKey = process.env.NEWS_API_KEY;
         try {
-            const res = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=kr`);
+            const res = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=kr`, {
+                next: { revalidate: 3600 },
+            });
             return res.json();
         } catch (err) {
             console.error(err);
